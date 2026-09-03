@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linda Pérez De León — Full-Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0D2138;
+    --blue-mid:#153454;
+    --blue-line:#2E5A82;
+    --line-cyan:#8FC1DE;
+    --paper:#F1EEE5;
+    --ink:#17222E;
+    --ink-soft:#4C5B6A;
+    --amber:#D98E3F;
+    --font-mono:'IBM Plex Mono', monospace;
+    --font-sans:'IBM Plex Sans', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-sans);
+    line-height:1.55;
+  }
+  a{color:inherit;}
+
+  /* ---------- HERO / TITLE BLOCK ---------- */
+  .hero{
+    background:var(--blue-deep);
+    color:var(--paper);
+    padding:64px 24px 40px;
+    position:relative;
+    background-image:
+      linear-gradient(var(--blue-mid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--blue-mid) 1px, transparent 1px);
+    background-size:32px 32px;
+    background-position:center;
+  }
+  .hero::before,.hero::after,
+  .hero-inner::before,.hero-inner::after{
+    content:"";
+    position:absolute;
+    width:18px;height:18px;
+    border:1.5px solid var(--line-cyan);
+    opacity:.8;
+  }
+  .hero::before{top:16px;left:16px;border-right:none;border-bottom:none;}
+  .hero::after{top:16px;right:16px;border-left:none;border-bottom:none;}
+  .hero-inner{position:relative;max-width:760px;margin:0 auto;}
+  .hero-inner::before{bottom:-24px;left:0;border-right:none;border-top:none;}
+  .hero-inner::after{bottom:-24px;right:0;border-left:none;border-top:none;}
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    letter-spacing:.04em;
+    color:var(--line-cyan);
+    margin:0 0 14px;
+  }
+  h1.name{
+    font-family:var(--font-sans);
+    font-weight:700;
+    font-size:clamp(32px,6vw,52px);
+    line-height:1.05;
+    margin:0 0 10px;
+    max-width:11ch;
+  }
+  .role-line{
+    font-family:var(--font-mono);
+    font-size:14px;
+    color:#CBD9E4;
+    margin:0 0 28px;
+  }
+
+  .title-block{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    border:1px solid var(--blue-line);
+    max-width:520px;
+    font-family:var(--font-mono);
+    font-size:13px;
+  }
+  .title-block div{
+    padding:10px 14px;
+    border-right:1px solid var(--blue-line);
+    border-bottom:1px solid var(--blue-line);
+  }
+  .title-block div:nth-child(2n){border-right:none;}
+  .title-block span{display:block;color:#8CA3B8;font-size:11px;margin-bottom:3px;}
+
+  /* ---------- SHEET SECTIONS ---------- */
+  .sheet{
+    max-width:760px;
+    margin:0 auto;
+    padding:44px 24px;
+    border-bottom:1px solid #D8D3C4;
+  }
+  .sheet:last-of-type{border-bottom:none;}
+  .sheet-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:22px;
+  }
+  .sheet-num{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--amber);
+    border:1px solid var(--amber);
+    padding:2px 7px;
+    white-space:nowrap;
+  }
+  .sheet-title{
+    font-size:22px;
+    font-weight:700;
+    margin:0;
+  }
+
+  .summary{
+    max-width:62ch;
+    color:var(--ink);
+    font-size:16px;
+  }
+
+  /* skills grid */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:0;
+    border-top:1px solid var(--blue-line);
+    border-left:1px solid var(--blue-line);
+  }
+  .skill-cell{
+    border-right:1px solid var(--blue-line);
+    border-bottom:1px solid var(--blue-line);
+    padding:16px 18px;
+    background:#EAE6D9;
+  }
+  .skill-cell h3{
+    font-family:var(--font-mono);
+    font-size:12px;
+    text-transform:lowercase;
+    color:var(--ink-soft);
+    margin:0 0 8px;
+    font-weight:500;
+  }
+  .skill-cell p{margin:0;font-size:14.5px;}
+
+  /* experience / projects */
+  .entry{
+    margin-bottom:26px;
+    padding-left:16px;
+    border-left:2px solid var(--blue-line);
+  }
+  .entry:last-child{margin-bottom:0;}
+  .entry-head{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:6px 16px;
+    margin-bottom:6px;
+  }
+  .entry-title{font-weight:700;font-size:16.5px;}
+  .entry-org{color:var(--ink-soft);font-size:14.5px;}
+  .entry-date{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+  .entry ul{
+    margin:8px 0 0;
+    padding-left:18px;
+    font-size:15px;
+  }
+  .entry li{margin-bottom:4px;}
+
+  .stack-tag{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--blue-mid);
+    background:#DEE7EC;
+    padding:1px 7px;
+    border-radius:2px;
+  }
+
+  /* footer / contact */
+  .footer{
+    background:var(--blue-deep);
+    color:var(--paper);
+    padding:48px 24px 32px;
+    text-align:left;
+  }
+  .footer-inner{max-width:760px;margin:0 auto;}
+  .footer h2{
+    font-size:24px;
+    margin:0 0 12px;
+  }
+  .footer p{color:#C7D3DD;max-width:52ch;margin:0 0 22px;}
+  .contact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 22px;
+    font-family:var(--font-mono);
+    font-size:13.5px;
+  }
+  .contact-row a{
+    text-decoration:none;
+    border-bottom:1px solid var(--amber);
+    padding-bottom:1px;
+    color:var(--paper);
+  }
+  .contact-row a:hover{color:var(--amber);}
+  .foot-note{
+    margin-top:34px;
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:#5E7488;
+  }
+
+  @media (max-width:520px){
+    .title-block{grid-template-columns:1fr;}
+    .title-block div{border-right:none;}
+    .entry-head{flex-direction:column;}
+  }
+
+  /* single orchestrated entrance on the hero title only */
+  @media (prefers-reduced-motion: no-preference){
+    h1.name, .role-line, .title-block{
+      animation:rise .6s ease-out both;
+    }
+    .role-line{animation-delay:.08s;}
+    .title-block{animation-delay:.16s;}
+    @keyframes rise{
+      from{opacity:0;transform:translateY(10px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">portafolio — desarrollo &amp; ciberseguridad</p>
+    <h1 class="name">Linda Rocío Pérez De León</h1>
+    <p class="role-line">Full-Stack Developer · Estudiante de Maestría en Ciberseguridad · Especialista en Power Platform</p>
+
+    <div class="title-block">
+      <div><span>ubicación</span>Guatemala City, GT (remoto)</div>
+      <div><span>correo</span>lindaperezdeleon@gmail.com</div>
+      <div><span>teléfono</span>+502 5533-1425</div>
+      <div><span>idiomas</span>Español (nativo), Inglés (B1)</div>
+    </div>
+  </div>
+</header>
+
+<section class="sheet">
+  <div class="sheet-head">
+    <span class="sheet-num">01</span>
+    <h2 class="sheet-title">Resumen</h2>
+  </div>
+  <p class="summary">
+    Desarrolladora de software orientada a resultados, con experiencia práctica en
+    desarrollo web full-stack, aplicaciones móviles, automatización empresarial e
+    infraestructura en la nube. He diseñado y entregado soluciones de extremo a extremo
+    para industrias como logística, automotriz, veterinaria y plataformas de membresía
+    digital. Actualmente curso una maestría en Ciberseguridad, con enfoque en
+    arquitectura de software segura.
+  </p>
+</section>
+
+<section class="sheet">
+  <div class="sheet-head">
+    <span class="sheet-num">02</span>
+    <h2 class="sheet-title">Habilidades técnicas</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-cell"><h3>frontend</h3><p>React, Angular, Tailwind CSS, REST APIs</p></div>
+    <div class="skill-cell"><h3>mobile</h3><p>Flutter + Firebase (FCM, Firestore Security Rules)</p></div>
+    <div class="skill-cell"><h3>backend</h3><p>Node.js, Power Apps, Power Automate, SharePoint, NAV API</p></div>
+    <div class="skill-cell"><h3>bases de datos</h3><p>MySQL, PostgreSQL, MongoDB</p></div>
+    <div class="skill-cell"><h3>infraestructura</h3><p>Docker, servidores Linux, AWS, Azure</p></div>
+  </div>
+</section>
+
+<section class="sheet">
+  <div class="sheet-head">
+    <span class="sheet-num">03</span>
+    <h2 class="sheet-title">Experiencia laboral</h2>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div>
+        <div class="entry-title">Departamento de TI</div>
+        <div class="entry-org">Alcazaren</div>
+      </div>
+      <div class="entry-date">2025 — mayo 2026</div>
+    </div>
+    <ul>
+      <li>Automatización de flujos internos y mejora de herramientas operativas con Power Platform.</li>
+      <li>Pruebas de sistemas, documentación técnica y respaldos de datos.</li>
+      <li>Colaboración con equipos multidisciplinarios para identificar y resolver ineficiencias del sistema.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div>
+        <div class="entry-title">Servicio al Cliente</div>
+        <div class="entry-org">Reconstructora de Motores CHAJ</div>
+      </div>
+      <div class="entry-date">sept. 2022 — feb. 2025</div>
+    </div>
+    <ul>
+      <li>Manejo de caja chica y control del flujo de efectivo diario.</li>
+      <li>Atención a clientes y resolución de consultas relacionadas con el servicio.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sheet">
+  <div class="sheet-head">
+    <span class="sheet-num">04</span>
+    <h2 class="sheet-title">Proyectos independientes</h2>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div class="entry-title">Digital Pass Forge — Plataforma de membresías</div>
+    </div>
+    <p style="margin:2px 0 8px;">
+      <span class="stack-tag">React</span> <span class="stack-tag">Node.js</span>
+      <span class="stack-tag">MySQL</span> <span class="stack-tag">Azure</span>
+    </p>
+    <ul>
+      <li>Ecosistema de membresías completo, estilo PassKit Pro, construido desde cero.</li>
+      <li>Autenticación segura, gestión de roles y manejo de suscripciones.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div class="entry-title">Automotive Workshop App — App para taller automotriz</div>
+    </div>
+    <p style="margin:2px 0 8px;">
+      <span class="stack-tag">Flutter</span> <span class="stack-tag">Firebase</span>
+    </p>
+    <ul>
+      <li>App móvil para órdenes de trabajo, diagnósticos, mantenimiento y notificaciones push (FCM).</li>
+      <li>Reglas de seguridad de Firestore y almacenamiento en la nube seguro.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div class="entry-title">Logistics TMS System — Sistema de gestión de transporte</div>
+    </div>
+    <p style="margin:2px 0 8px;">
+      <span class="stack-tag">Power Apps</span> <span class="stack-tag">Power Automate</span>
+      <span class="stack-tag">SharePoint</span> <span class="stack-tag">NAV API</span>
+    </p>
+    <ul>
+      <li>Integración con NAV API para manejo de datos JSON complejos y automatización logística.</li>
+      <li>Optimización de flujos de validación y gestión de espacios de producto.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div class="entry-title">QR Box Generator — Herramienta web</div>
+    </div>
+    <ul>
+      <li>Herramienta web a medida para impresión precisa de etiquetas en centímetros.</li>
+      <li>Gestión de espacios seleccionados, panel de control visual, carga de imágenes y vista previa automática.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sheet">
+  <div class="sheet-head">
+    <span class="sheet-num">05</span>
+    <h2 class="sheet-title">Educación</h2>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div>
+        <div class="entry-title">Maestría en Ciberseguridad</div>
+        <div class="entry-org">Universidad Mariano Gálvez de Guatemala — en curso, año 1</div>
+      </div>
+      <div class="entry-date">2026 — 2027</div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div>
+        <div class="entry-title">Ingeniería en Sistemas</div>
+        <div class="entry-org">Universidad Mariano Gálvez de Guatemala</div>
+      </div>
+      <div class="entry-date">graduada 2025</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <h2>Trabajemos juntos</h2>
+    <p>Disponible para proyectos remotos de desarrollo full-stack, automatización con Power Platform y arquitectura de software segura.</p>
+    <div class="contact-row">
+      <a href="mailto:lindaperezdeleon@gmail.com">lindaperezdeleon@gmail.com</a>
+      <a href="tel:+50255331425">+502 5533-1425</a>
+      <span>Guatemala City, Guatemala</span>
+    </div>
+    <p class="foot-note">hoja 06/06 — última actualización: 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>
